@@ -1,0 +1,131 @@
+<section
+  class="bg-slate-900 dark:bg-gray-900 bg-cover bg-center h-screen"
+  style="background-image: url(../../../../../assets/img/p/img/johannes-plenio-qkfxBc2NQ18-unsplash.jpg);"
+>
+  <div
+    class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0"
+  >
+    <div
+      class="w-full text-black-600 rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p backdrop-blur-lg bg-gray-800 bg-opacity-30 dark:border-green-700"
+    >
+      <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+        <h1
+          class="text-xl font-medium leading-tight tracking-tight bg-customBrown md:text-2xl text-center text-black hover:text-white-50"
+        >
+          Sign in to your account
+        </h1>
+        <!-- Social Media Buttons -->
+        <div class="flex justify-center space-x-4">
+          <button class="bg-blue-950 text-white py-2 px-4 rounded-lg hover:bg-orange-700">
+            Facebook
+          </button>
+          <button class="bg-blue-950 text-white py-2 px-4 rounded-lg hover:bg-orange-700">
+            Twitter
+          </button>
+          <button class="bg-blue-950 text-white py-2 px-4 rounded-lg hover:bg-orange-700">
+            Google
+          </button>
+        </div>
+        <form
+          [formGroup]="loginForm"
+          (ngSubmit)="handleLogin()"
+          class="space-y-4 md:space-y-6"
+          id="loginForm"
+        >
+          <div>
+            <label for="email" class="block mb-2 text-sm font-medium text-black">
+              Your email
+            </label>
+            <input
+              type="text"
+              id="email"
+              formControlName="email"
+              class="text-white bg-transparent outline-none border shadow-sm sm:text-sm rounded-lg focus:ring-1 focus:ring-amber-300 focus:border-amber-200 block w-full p-2.5"
+              placeholder="name@company.com"
+            />
+            <div
+              *ngIf="email?.invalid && (email?.dirty || email?.touched)"
+              class="text-white text-sm mt-1"
+            >
+              <span *ngIf="email?.errors?.['required']">Email is required.</span>
+              <span *ngIf="email?.errors?.['email']">Invalid email format.</span>
+            </div>
+          </div>
+          <div>
+            <label for="password" class="block mb-2 text-sm font-medium text-black">
+              Password
+            </label>
+            <input
+              type="password"
+              id="password"
+              formControlName="password"
+              placeholder="••••••••"
+              class="text-white bg-transparent outline-none border shadow-sm sm:text-sm rounded-lg focus:ring-1 focus:ring-amber-300 focus:border-amber-200 block w-full p-2.5"
+            />
+            <div
+              *ngIf="password?.invalid && (password?.dirty || password?.touched)"
+              class="text-white text-sm mt-1"
+            >
+              <span *ngIf="password?.errors?.['required']">Password is required.</span>
+              <span *ngIf="password?.errors?.['minlength']">
+                Password must be at least 8 characters long.
+              </span>
+            </div>
+          </div>
+          <div class="flex items-center justify-between">
+            <div class="flex items-start">
+              <div class="flex items-center h-5">
+                <input
+                  id="remember"
+                  type="checkbox"
+                  formControlName="remember"
+                  class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
+                />
+              </div>
+              <div class="ml-3 text-sm">
+                <label for="remember" class="text-black form-checkbox rounded checked:bg-orange-400">
+                  Remember me
+                </label>
+              </div>
+            </div>
+            <a href="#" class="text-sm text-black hover:underline">Forgot password?</a>
+          </div>
+          <button
+            type="submit"
+            class="w-full bg-amber-600 text-white py-2 rounded-lg hover:bg-amber-700"
+          >
+            Login
+          </button>
+          <p class="text-sm text-black">
+            Don’t have an account yet?
+            <a routerLink="/signup" class="font-medium text-amber-600 hover:underline">Sign up</a>
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div
+    *ngIf="toastMessage"
+    class="fixed bottom-4 right-4 flex items-center w-64 max-w-xs p-4 space-x-4 rtl:space-x-reverse text-gray-500 bg-white divide-x rtl:divide-x-reverse divide-gray-200 rounded-lg shadow dark:text-gray-400 dark:divide-gray-700 dark:bg-gray-800"
+    role="alert"
+  >
+    <svg
+      class="w-5 h-5 text-blue-600 dark:text-blue-500 rotate-45"
+      aria-hidden="true"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 18 20"
+    >
+      <path
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="m9 17 8 2L9 1 1 19l8-2Zm0 0V9"
+      />
+    </svg>
+    <div class="ps-7 text-sm font-normal">{{ toastMessage }}</div>
+  </div>
+</section>
