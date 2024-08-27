@@ -1,0 +1,264 @@
+<section
+  class="bg-cover bg-center flex items-center justify-center bg-gradient-to-b from-blue-700 to-blue-300 h-screen"
+  style="min-block-size: 100vh"
+>
+  <div
+    class="w-full max-w-lg bg-white bg-opacity-70 rounded-lg p-10 shadow-lg animate-fade-in"
+  >
+    <h3 class="text-black text-2xl font-bold mb-6 text-center">
+      Update Details
+    </h3>
+    <p class="text-center mb-4 text-gray-600">
+      Want to change your email?
+      <a href="" class="font-medium text-blue-600 hover:text-blue-800"
+        >Update Email</a
+      >
+    </p>
+
+    <form
+      [formGroup]="userDetailsForm"
+      (ngSubmit)="onSubmit()"
+      class="space-y-4"
+    >
+      <!-- Name Field -->
+      <div class="relative sticky-field-container">
+        <label for="name" class="block text-gray-800 font-medium mb-1"
+          >Name</label
+        >
+        <input
+          id="name"
+          type="text"
+          formControlName="name"
+          required
+          placeholder="Enter your name"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out"
+        />
+        <div
+          *ngIf="
+            userDetailsForm.get('name')?.invalid &&
+            (userDetailsForm.get('name')?.dirty ||
+              userDetailsForm.get('name')?.touched)
+          "
+          class="text-red-500 text-sm mt-1"
+        >
+          <small *ngIf="userDetailsForm.get('name')?.hasError('required')"
+            >Name is required.</small
+          >
+          <small *ngIf="userDetailsForm.get('name')?.hasError('minlength')"
+            >Name must be at least 2 characters long.</small
+          >
+        </div>
+      </div>
+
+      <!-- Email Field (Read-Only) -->
+      <div class="relative sticky-field-container">
+        <label for="email" class="block text-gray-800 font-medium mb-1"
+          >Email</label
+        >
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          required
+          placeholder="Enter your email"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out"
+          readonly
+        />
+      </div>
+
+      <!-- Password Field -->
+      <div class="relative sticky-field-container">
+        <label for="password" class="block text-gray-800 font-medium mb-1"
+          >Password</label
+        >
+        <input
+          id="password"
+          type="password"
+          formControlName="password"
+          required
+          placeholder="Enter your password"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out"
+        />
+        <div
+          *ngIf="
+            userDetailsForm.get('password')?.invalid &&
+            (userDetailsForm.get('password')?.dirty ||
+              userDetailsForm.get('password')?.touched)
+          "
+          class="text-red-500 text-sm mt-1"
+        >
+          <small *ngIf="userDetailsForm.get('password')?.hasError('required')"
+            >Password is required.</small
+          >
+          <small *ngIf="userDetailsForm.get('password')?.hasError('minlength')"
+            >Password must be at least 6 characters long.</small
+          >
+        </div>
+      </div>
+
+      <!-- Confirm Password Field -->
+      <div class="relative sticky-field-container">
+        <label
+          for="reEnterPassword"
+          class="block text-gray-800 font-medium mb-1"
+          >Confirm Password</label
+        >
+        <input
+          id="reEnterPassword"
+          type="password"
+          formControlName="reEnterPassword"
+          required
+          placeholder="Re-enter your password"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out"
+        />
+        <div
+          *ngIf="userDetailsForm.errors?.['notMatch'] && (userDetailsForm.get('reEnterPassword')?.dirty || userDetailsForm.get('reEnterPassword')?.touched)"
+          class="text-red-500 text-sm mt-1"
+        >
+          <small class="text-red-500">Passwords do not match.</small>
+        </div>
+      </div>
+
+      <!-- Mobile Field -->
+      <div class="relative sticky-field-container">
+        <label for="mobile" class="block text-gray-800 font-medium mb-1"
+          >Mobile</label
+        >
+        <input
+          id="mobile"
+          type="text"
+          formControlName="mobile"
+          required
+          placeholder="Enter your mobile number"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out"
+        />
+        <div
+          *ngIf="
+            userDetailsForm.get('mobile')?.invalid &&
+            (userDetailsForm.get('mobile')?.dirty ||
+              userDetailsForm.get('mobile')?.touched)
+          "
+          class="text-red-500 text-sm mt-1"
+        >
+          <small *ngIf="userDetailsForm.get('mobile')?.hasError('required')"
+            >Mobile number is required.</small
+          >
+          <small *ngIf="userDetailsForm.get('mobile')?.hasError('pattern')"
+            >Mobile number must be 10 digits.</small
+          >
+        </div>
+      </div>
+
+      <!-- Gender Field -->
+      <div class="relative sticky-field-container">
+        <label for="gender" class="block text-gray-800 font-medium mb-1"
+          >Gender</label
+        >
+        <select
+          id="gender"
+          formControlName="gender"
+          required
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out"
+        >
+          <option value="" disabled>Select your gender</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="other">Other</option>
+        </select>
+        <div
+          *ngIf="
+            userDetailsForm.get('gender')?.invalid &&
+            (userDetailsForm.get('gender')?.dirty ||
+              userDetailsForm.get('gender')?.touched)
+          "
+          class="text-red-500 text-sm mt-1"
+        >
+          <small class="text-red-500">Gender is required.</small>
+        </div>
+      </div>
+
+      <!-- Date of Birth Field -->
+      <div class="relative sticky-field-container">
+        <label for="dob" class="block text-gray-800 font-medium mb-1"
+          >Date of Birth</label
+        >
+        <input
+          id="dob"
+          type="date"
+          formControlName="dob"
+          required
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out"
+        />
+        <div
+          *ngIf="
+            userDetailsForm.get('dob')?.invalid &&
+            (userDetailsForm.get('dob')?.dirty ||
+              userDetailsForm.get('dob')?.touched)
+          "
+          class="text-red-500 text-sm mt-1"
+        >
+          <small class="text-red-500">Date of Birth is required.</small>
+        </div>
+      </div>
+
+      <div class="text-center mt-6">
+        <button
+          id="updateDetailsButton"
+          type="submit"
+          class="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg text-sm transition duration-300 ease-in-out hover:bg-blue-700"
+          [disabled]="!userDetailsForm.valid"
+        >
+          Update Details
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Toast Notification -->
+  <div
+    *ngIf="toastMessage"
+    class="fixed bottom-4 right-4 flex items-center w-80 max-w-xs p-4 mb-4 bg-white text-gray-800 rounded-lg shadow-lg animate-slide-in"
+  >
+    <div
+      class="flex-shrink-0 w-8 h-8 bg-amber-600 text-white rounded-full flex items-center justify-center"
+    >
+      <svg
+        class="w-5 h-5"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M18 8a6 6 0 10-12 0 6 6 0 0012 0zM9 12a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zm-1-6a1 1 0 011 1v3a1 1 0 01-2 0V7a1 1 0 011-1z"
+          clip-rule="evenodd"
+        />
+      </svg>
+    </div>
+    <div class="ml-3 text-sm font-medium">
+      {{ toastMessage }}
+    </div>
+    <button
+      type="button"
+      class="ml-auto p-1.5 text-gray-800 hover:bg-gray-100 rounded-lg inline-flex h-8 w-8"
+      (click)="toastMessage = ''"
+      aria-label="Close"
+    >
+      <svg
+        class="w-3 h-3"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 14 14"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M1 1l12 12M13 1L1 13"
+        />
+      </svg>
+    </button>
+  </div>
+</section>

@@ -1,1 +1,45 @@
+<!-- Sidebar -->
 <router-outlet></router-outlet>
+<div
+  id="sidebar"
+  class="bg-gray-800 text-white w-64 space-y-6 p-4"
+  [ngClass]="{ hidden: isSidebarHidden }"
+>
+  <div class="text-xl font-semibold">MyApp</div>
+  <nav class="space-y-2">
+    <a
+      href="#"
+      routerLink="/account-link"
+      id="account-link"
+      (click)="showAccountForm()"
+      class="block text-gray-300 hover:bg-gray-700 px-3 py-2 rounded"
+    >
+      Account
+    </a>
+    <a
+      href=""
+      routerLink="/customerForm-link"
+      id="customerForm-link"
+      (click)="showCustomerForm()"
+      class="block text-gray-300 hover:bg-gray-700 px-3 py-2 rounded"
+    >
+      Customer
+    </a>
+    <a
+      href="#"
+      id="meterForm-link"
+      (click)="showMeterForm()"
+      class="block text-gray-300 hover:bg-gray-700 px-3 py-2 rounded"
+    >
+      Meter
+    </a>
+    <a
+      href="#"
+      id="mapForm-link"
+      (click)="showMapForm()"
+      class="block text-gray-300 hover:bg-gray-700 px-3 py-2 rounded"
+    >
+      Map
+    </a>
+  </nav>
+</div>

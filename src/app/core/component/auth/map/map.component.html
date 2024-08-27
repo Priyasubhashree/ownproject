@@ -1,0 +1,205 @@
+<div class="flex h-screen">
+  <div class="flex-1 flex flex-col p-14">
+    <div
+      class="bg-gradient-to-r from-gray-300 via-gray-400 to-gray-500 shadow-md rounded px-8 py-6 w-full max-w-lg mx-auto"
+    >
+      <h2 class="text-2xl font-semibold mb-6">Map Details</h2>
+      <form [formGroup]="mapForm" (ngSubmit)="onSaveMap()">
+        <!-- Account ID -->
+        <div class="mb-4 sticky-field-container">
+          <label
+            class="block text-gray-700 text-sm font-bold mb-2"
+            for="accountid"
+            >Account ID</label
+          >
+          <select
+            formControlName="accountid"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="accountid"
+          >
+            <option value="" disabled selected>Select Account ID</option>
+            <option *ngFor="let id of accountIds" [value]="id">{{ id }}</option>
+          </select>
+          <div
+            *ngIf="
+              mapForm.get('accountid')?.invalid &&
+              (mapForm.get('accountid')?.dirty ||
+                mapForm.get('accountid')?.touched)
+            "
+          >
+            <small
+              class="text-red-600"
+              *ngIf="mapForm.get('accountid')?.hasError('required')"
+              >Account ID is required.</small
+            >
+          </div>
+        </div>
+
+        <!-- Customer ID -->
+        <div class="mb-4 sticky-field-container">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="cusid"
+            >Customer ID</label
+          >
+          <select
+            formControlName="cusid"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="cusid"
+          >
+            <option value="" disabled selected>Select Customer ID</option>
+            <option *ngFor="let id of customerIds" [value]="id">{{ id }}</option>
+          </select>
+          <div
+            *ngIf="
+              mapForm.get('cusid')?.invalid &&
+              (mapForm.get('cusid')?.dirty || mapForm.get('cusid')?.touched)
+            "
+          >
+            <small
+              class="text-red-600"
+              *ngIf="mapForm.get('cusid')?.hasError('required')"
+              >Customer ID is required.</small
+            >
+          </div>
+        </div>
+
+        <!-- Location -->
+        <div class="mb-4 sticky-field-container">
+          <label
+            class="block text-gray-700 text-sm font-bold mb-2"
+            for="location"
+            >Location</label
+          >
+          <select
+            formControlName="location"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="location"
+          >
+            <option value="" disabled selected>Select Location</option>
+            <option *ngFor="let id of locationIds" [value]="id">{{ id }}</option>
+          </select>
+          <div
+            *ngIf="
+              mapForm.get('location')?.invalid &&
+              (mapForm.get('location')?.dirty ||
+                mapForm.get('location')?.touched)
+            "
+          >
+            <small
+              class="text-red-600"
+              *ngIf="mapForm.get('location')?.hasError('required')"
+              >Location is required.</small
+            >
+          </div>
+        </div>
+
+        <!-- Status -->
+        <div class="mb-4 sticky-field-container">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="status"
+            >Status</label
+          >
+          <select
+            formControlName="status"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="status"
+          >
+            <option value="" disabled selected>Select Status</option>
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+          </select>
+          <div
+            *ngIf="
+              mapForm.get('status')?.invalid &&
+              (mapForm.get('status')?.dirty || mapForm.get('status')?.touched)
+            "
+          >
+            <small
+              class="text-red-600"
+              *ngIf="mapForm.get('status')?.hasError('required')"
+              >Status is required.</small
+            >
+          </div>
+        </div>
+
+        <!-- Start Date -->
+        <div class="mb-4 sticky-field-container">
+          <label
+            class="block text-gray-700 text-sm font-bold mb-2"
+            for="start-date"
+            >Start Date</label
+          >
+          <input
+            formControlName="startDate"
+            placeholder="Select Start Date"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="start-date"
+            type="date"
+          />
+          <div
+            *ngIf="
+              mapForm.get('startDate')?.invalid &&
+              (mapForm.get('startDate')?.dirty ||
+                mapForm.get('startDate')?.touched)
+            "
+          >
+            <small
+              class="text-red-600"
+              *ngIf="mapForm.get('startDate')?.hasError('required')"
+              >Start Date is required.</small
+            >
+          </div>
+        </div>
+
+        <!-- End Date -->
+        <div class="mb-4 sticky-field-container">
+          <label
+            class="block text-gray-700 text-sm font-bold mb-2"
+            for="end-date"
+            >End Date</label
+          >
+          <input
+            formControlName="endDate"
+            placeholder="Select End Date"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="end-date"
+            type="date"
+          />
+          <div
+            *ngIf="
+              mapForm.get('endDate')?.invalid &&
+              (mapForm.get('endDate')?.dirty || mapForm.get('endDate')?.touched)
+            "
+          >
+            <small
+              class="text-red-600"
+              *ngIf="mapForm.get('endDate')?.hasError('required')"
+              >End Date is required.</small
+            >
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between">
+          <button
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            type="submit"
+          >
+            Finish
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Toast Notification -->
+<div
+  *ngIf="toastMessage"
+  class="fixed bottom-4 right-4 flex items-center w-64 max-w-xs p-4 space-x-4 text-white bg-gray-600 rounded-lg shadow-lg"
+>
+  <p class="text-sm">{{ toastMessage }}</p>
+  <button
+    class="text-lg font-semibold text-black focus:outline-none"
+    (click)="closeToast()"
+  >
+    &times;
+  </button>
+</div>

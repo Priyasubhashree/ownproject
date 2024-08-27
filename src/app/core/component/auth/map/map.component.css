@@ -1,0 +1,20 @@
+.sticky-field-container {
+  position: relative;
+  /* margin-block-end: 0.5rem; /* Adjust as needed to ensure space for error messages */
+}
+
+.sticky-field-container small {
+  position: absolute;
+  inset-block-end: -1.2rem; /* Position the error message below the input field */
+  inset-inline-start: 0;
+  color: red; /* Adjust the color if needed */
+  font-size: 0.875rem; /* Adjust the font size */
+}
+
+.sticky-field-container input {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 10;
+  background: white;
+  padding-block-end: 1rem;
+}

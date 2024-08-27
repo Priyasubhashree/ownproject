@@ -5,3 +5,7 @@ input.ng-invalid.ng-touched {
 .text-red-500 {
   color: #e3342f;
 }
+input[type="email"] {
+  text-transform: lowercase;
+}
+

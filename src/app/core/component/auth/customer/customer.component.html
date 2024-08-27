@@ -1,0 +1,157 @@
+<div class="flex min-h-screen">
+  <div class="flex-1 flex flex-col p-14">
+    <div
+      class="bg-gradient-to-r from-gray-300 via-gray-400 to-gray-500 shadow-md rounded px-8 py-6 w-full max-w-lg mx-auto"
+    >
+      <h2 class="text-2xl font-semibold mb-6">Customer Details</h2>
+      <form [formGroup]="customerForm" (ngSubmit)="handleCustomer()">
+        <!-- Customer Name -->
+        <div class="mb-4">
+          <label
+            class="block text-gray-700 text-sm font-bold mb-2"
+            for="customer-name"
+            >Customer Name</label
+          >
+          <input
+            formControlName="customerName"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="customer-name"
+            type="text"
+            placeholder="Enter Customer Name"
+          />
+          <div
+            *ngIf="
+              customerForm.get('customerName')?.invalid &&
+              (customerForm.get('customerName')?.dirty ||
+                customerForm.get('customerName')?.touched)
+            "
+          >
+            <small
+              class="text-red-600"
+              *ngIf="customerForm.get('customerName')?.hasError('required')"
+              >Customer Name is required.</small
+            >
+          </div>
+        </div>
+
+        <!-- Address -->
+        <div class="mb-4">
+          <label
+            class="block text-gray-700 text-sm font-bold mb-2"
+            for="address"
+            >Address</label
+          >
+          <input
+            formControlName="address"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="address"
+            type="text"
+            placeholder="Enter Address"
+          />
+          <div
+            *ngIf="
+              customerForm.get('address')?.invalid &&
+              (customerForm.get('address')?.dirty || customerForm.get('address')?.touched)
+            "
+          >
+            <small
+              class="text-red-600"
+              *ngIf="customerForm.get('address')?.hasError('required')"
+              >Address is required.</small
+            >
+          </div>
+        </div>
+
+        <!-- City -->
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="city"
+            >City</label
+          >
+          <input
+            formControlName="city"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="city"
+            type="text"
+            placeholder="Enter City"
+          />
+          <div
+            *ngIf="
+              customerForm.get('city')?.invalid &&
+              (customerForm.get('city')?.dirty || customerForm.get('city')?.touched)
+            "
+          >
+            <small
+              class="text-red-600"
+              *ngIf="customerForm.get('city')?.hasError('required')"
+              >City is required.</small
+            >
+          </div>
+        </div>
+
+        <!-- Phone -->
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="phone"
+            >Phone</label
+          >
+          <input
+            formControlName="phone"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="phone"
+            type="text"
+            placeholder="Enter Phone Number"
+          />
+          <div
+            *ngIf="
+              customerForm.get('phone')?.invalid &&
+              (customerForm.get('phone')?.dirty || customerForm.get('phone')?.touched)
+            "
+          >
+            <small
+              class="text-red-600"
+              *ngIf="customerForm.get('phone')?.hasError('required')"
+              >Phone number is required.</small
+            >
+            <small
+              class="text-red-600"
+              *ngIf="customerForm.get('phone')?.hasError('pattern')"
+              >Phone number must be numeric.</small
+            >
+            <small
+              class="text-red-600"
+              *ngIf="customerForm.get('phone')?.hasError('minlength')"
+              >Phone number must be 10 digits long.</small
+            >
+            <small
+              class="text-red-600"
+              *ngIf="customerForm.get('phone')?.hasError('maxlength')"
+              >Phone number must be 10 digits long.</small
+            >
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between">
+          <button
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            type="submit"
+          >
+            Save
+          </button>
+        </div>
+      </form>
+
+      <!-- Toast Notification -->
+      <div
+        *ngIf="toastMessage"
+        class="fixed bottom-4 right-4 flex items-center w-64 max-w-xs p-4 space-x-4 text-white bg-gray-600 rounded-lg shadow-lg"
+      >
+        <p class="text-sm">{{ toastMessage }}</p>
+        <button
+          class="text-lg font-semibold text-black focus:outline-none"
+          (click)="toastMessage = ''"
+        >
+          &times;
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

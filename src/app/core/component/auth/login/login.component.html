@@ -1,77 +1,170 @@
 <section
-  class="bg-slate-900 dark:bg-gray-900 bg-cover bg-center h-screen"
-  style="background-image: url(../../../../../assets/img/p/img/johannes-plenio-qkfxBc2NQ18-unsplash.jpg);"
+  class="bg-gradient-to-b from-blue-700 to-blue-300 h-screen"
+  style="min-block-size: 100vh"
 >
   <div
     class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0"
   >
     <div
-      class="w-full text-black-600 rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p backdrop-blur-lg bg-gray-800 bg-opacity-30 dark:border-green-700"
+      class="w-full max-w-md bg-white bg-opacity-70 backdrop-blur-lg rounded-lg shadow-lg dark:bg-gray-800 dark:bg-opacity-60"
     >
-      <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+      <div class="p-6 space-y-6">
         <h1
-          class="text-xl font-medium leading-tight tracking-tight bg-customBrown md:text-2xl text-center text-black hover:text-white-50"
+          class="text-2xl font-bold leading-tight tracking-tight text-center text-gray-800 dark:text-white"
         >
           Sign in to your account
         </h1>
+
         <!-- Social Media Buttons -->
         <div class="flex justify-center space-x-4">
-          <button class="bg-blue-950 text-white py-2 px-4 rounded-lg hover:bg-orange-700">
+          <button
+            class="flex items-center justify-center w-full py-2 text-sm font-semibold text-white transition-colors duration-300 bg-blue-600 rounded-lg hover:bg-blue-700"
+          >
             Facebook
           </button>
-          <button class="bg-blue-950 text-white py-2 px-4 rounded-lg hover:bg-orange-700">
+          <button
+            class="flex items-center justify-center w-full py-2 text-sm font-semibold text-white transition-colors duration-300 bg-blue-400 rounded-lg hover:bg-blue-500"
+          >
             Twitter
           </button>
-          <button class="bg-blue-950 text-white py-2 px-4 rounded-lg hover:bg-orange-700">
+          <button
+            class="flex items-center justify-center w-full py-2 text-sm font-semibold text-white transition-colors duration-300 bg-red-500 rounded-lg hover:bg-red-600"
+          >
             Google
           </button>
         </div>
+
+        <!-- Login Form -->
         <form
           [formGroup]="loginForm"
           (ngSubmit)="handleLogin()"
-          class="space-y-4 md:space-y-6"
+          class="space-y-4"
           id="loginForm"
         >
-          <div>
-            <label for="email" class="block mb-2 text-sm font-medium text-black">
+          <!-- Email Input Field -->
+          <div class="sticky top-0">
+            <label
+              for="email"
+              class="block mb-2 text-sm font-medium text-gray-800 dark:text-white"
+            >
               Your email
             </label>
-            <input
-              type="text"
-              id="email"
-              formControlName="email"
-              class="text-white bg-transparent outline-none border shadow-sm sm:text-sm rounded-lg focus:ring-1 focus:ring-amber-300 focus:border-amber-200 block w-full p-2.5"
-              placeholder="name@company.com"
-            />
+            <div class="relative">
+              <input
+                type="email"
+                id="email"
+                formControlName="email"
+                class="block w-full p-2.5 text-gray-800 transition-colors duration-300 bg-white border border-gray-300 rounded-lg shadow-sm outline-none dark:bg-gray-700 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:border-gray-600"
+                placeholder="name@gmail.com"
+                (input)="emailInput.value = emailInput.value.toLowerCase()"
+                #emailInput
+              />
+              <!-- Conditionally show the green tick -->
+              <svg
+                *ngIf="isVerified"
+                xmlns="http://www.w3.org/2000/svg"
+                class="absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-green-500"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"
+                />
+              </svg>
+            </div>
             <div
-              *ngIf="email?.invalid && (email?.dirty || email?.touched)"
-              class="text-white text-sm mt-1"
+              *ngIf="
+                loginForm.get('email')?.invalid &&
+                (loginForm.get('email')?.dirty ||
+                  loginForm.get('email')?.touched)
+              "
+              class="absolute text-sm mt-1 text-red-500"
             >
-              <span *ngIf="email?.errors?.['required']">Email is required.</span>
-              <span *ngIf="email?.errors?.['email']">Invalid email format.</span>
+              <span *ngIf="loginForm.get('email')?.errors?.['required']"
+                >Email is required.</span
+              >
+              <span *ngIf="loginForm.get('email')?.errors?.['email']"
+                >Invalid email format.</span
+              >
             </div>
           </div>
-          <div>
-            <label for="password" class="block mb-2 text-sm font-medium text-black">
+
+          <!-- Password Input Field -->
+          <!-- Password Input Field -->
+          <div class="sticky top-16">
+            <label
+              for="password"
+              class="block mb-2 text-sm font-medium text-gray-800 dark:text-white"
+            >
               Password
             </label>
-            <input
-              type="password"
-              id="password"
-              formControlName="password"
-              placeholder="••••••••"
-              class="text-white bg-transparent outline-none border shadow-sm sm:text-sm rounded-lg focus:ring-1 focus:ring-amber-300 focus:border-amber-200 block w-full p-2.5"
-            />
+            <div class="relative">
+              <input
+                [type]="showPassword ? 'text' : 'password'"
+                id="password"
+                formControlName="password"
+                placeholder="••••••••"
+                class="block w-full p-2.5 text-gray-800 transition-colors duration-300 bg-white border border-gray-300 rounded-lg shadow-sm outline-none dark:bg-gray-700 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:border-gray-600"
+              />
+              <button
+                type="button"
+                (click)="togglePasswordVisibility()"
+                class="absolute inset-y-0 right-0 flex items-center px-3 text-gray-500"
+              >
+                <svg
+                  *ngIf="!showPassword"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 5a7 7 0 00-7 7 7 7 0 007 7 7 7 0 007-7 7 7 0 00-7-7zM12 8a4 4 0 00-4 4 4 4 0 004 4 4 4 0 004-4 4 4 0 00-4-4z"
+                  />
+                </svg>
+                <svg
+                  *ngIf="showPassword"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 3v1m0 16v1m-4-4h8m-4-4h4m4-4h1M4 4h1M4 20h1m-1-1V5m14 14V5m-1 0h1M4 20a9 9 0 0110-10A9 9 0 0120 20a9 9 0 01-9-9 9 9 0 00-9 9z"
+                  />
+                </svg>
+              </button>
+            </div>
             <div
-              *ngIf="password?.invalid && (password?.dirty || password?.touched)"
-              class="text-white text-sm mt-1"
+              *ngIf="
+                loginForm.get('password')?.invalid &&
+                (loginForm.get('password')?.dirty ||
+                  loginForm.get('password')?.touched)
+              "
+              class="absolute text-sm mt-1 text-red-500"
             >
-              <span *ngIf="password?.errors?.['required']">Password is required.</span>
-              <span *ngIf="password?.errors?.['minlength']">
+              <span *ngIf="loginForm.get('password')?.errors?.['required']"
+                >Password is required.</span
+              >
+              <span *ngIf="loginForm.get('password')?.errors?.['minlength']">
                 Password must be at least 8 characters long.
               </span>
             </div>
           </div>
+
+          <!-- Remember Me & Forgot Password -->
           <div class="flex items-center justify-between">
             <div class="flex items-start">
               <div class="flex items-center h-5">
@@ -79,26 +172,39 @@
                   id="remember"
                   type="checkbox"
                   formControlName="remember"
-                  class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
+                  class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-500 dark:ring-offset-gray-800"
                 />
               </div>
               <div class="ml-3 text-sm">
-                <label for="remember" class="text-black form-checkbox rounded checked:bg-orange-400">
-                  Remember me
-                </label>
+                <label for="remember" class="text-gray-800 dark:text-white"
+                  >Remember me</label
+                >
               </div>
             </div>
-            <a href="#" class="text-sm text-black hover:underline">Forgot password?</a>
+            <a
+              routerLink="/forgot"
+              class="text-sm text-blue-600 dark:text-blue-400 hover:underline"
+              >Forgot password?</a
+            >
           </div>
+
+          <!-- Login Button -->
           <button
             type="submit"
-            class="w-full bg-amber-600 text-white py-2 rounded-lg hover:bg-amber-700"
+            class="w-full py-2 text-white transition-colors duration-300 bg-blue-600 rounded-lg hover:bg-blue-700"
+            [disabled]="loginForm.invalid"
           >
             Login
           </button>
-          <p class="text-sm text-black">
+
+          <!-- Sign Up Link -->
+          <p class="text-sm text-center text-gray-800 dark:text-white">
             Don’t have an account yet?
-            <a routerLink="/signup" class="font-medium text-amber-600 hover:underline">Sign up</a>
+            <a
+              routerLink="/signup"
+              class="font-medium text-blue-600 dark:text-blue-400 hover:underline"
+              >Sign up</a
+            >
           </p>
         </form>
       </div>
@@ -108,24 +214,15 @@
   <!-- Toast Notification -->
   <div
     *ngIf="toastMessage"
-    class="fixed bottom-4 right-4 flex items-center w-64 max-w-xs p-4 space-x-4 rtl:space-x-reverse text-gray-500 bg-white divide-x rtl:divide-x-reverse divide-gray-200 rounded-lg shadow dark:text-gray-400 dark:divide-gray-700 dark:bg-gray-800"
-    role="alert"
+    class="fixed bottom-4 right-4 flex items-center w-64 max-w-xs p-4 space-x-4 text-white bg-blue-600 rounded-lg shadow-lg"
   >
-    <svg
-      class="w-5 h-5 text-blue-600 dark:text-blue-500 rotate-45"
-      aria-hidden="true"
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 18 20"
+    <span class="material-icons"></span>
+    <p class="text-sm">{{ toastMessage }}</p>
+    <button
+      class="text-lg font-semibold text-white focus:outline-none"
+      (click)="toastMessage = ''"
     >
-      <path
-        stroke="currentColor"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        d="m9 17 8 2L9 1 1 19l8-2Zm0 0V9"
-      />
-    </svg>
-    <div class="ps-7 text-sm font-normal">{{ toastMessage }}</div>
+      &times;
+    </button>
   </div>
 </section>
